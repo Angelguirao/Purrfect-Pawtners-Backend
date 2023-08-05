@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const Home = require('../models/Home');
+const Home = require('../models/Home.model');
 
 // POST request to create Home - "C"RUD
 router.post('/homes', async (req, res) => {
