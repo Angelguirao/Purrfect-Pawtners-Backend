@@ -15,9 +15,10 @@ router.post('/homes', async (req, res) => {
 // GET request to get a list of Homes - C"R"UD
 router.get('/homes', async (req, res) => {
     try {
-        const homes = await Home.find().populate('Owner').populate('Friends');
+        const homes = await Home.find()//.populate('Owner').populate('Friends');
         res.status(200).json(homes);
     } catch (err) {
+        console.error("Error fetching homes:", err);
         res.status(500).json(err);
     }
 });
@@ -25,7 +26,7 @@ router.get('/homes', async (req, res) => {
 // GET request to get a specific Home - C"R"UD
 router.get('/homes/:id', async (req, res) => {
     try {
-        const home = await Home.findById(req.params.id).populate('Owner').populate('Friends');
+        const home = await Home.findById(req.params.id)//.populate('Owner').populate('Friends');
         res.status(200).json(home);
     } catch (err) {
         res.status(500).json(err);
