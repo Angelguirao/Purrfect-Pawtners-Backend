@@ -18,14 +18,15 @@ const HomeSchema = new Schema({
         type: String,
         required: true
     },
-    Owner: {
+    /* Owner: {
         type: Schema.Types.ObjectId,
         ref: 'User'
     },
-    Friends: [{
+    // Friends: [{
         type: Schema.Types.ObjectId,
         ref: 'Cat'
     }]
+    */
 });
 
 const Home = model('Home', HomeSchema);
