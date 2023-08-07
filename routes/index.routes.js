@@ -5,7 +5,6 @@ router.get("/", (req, res, next) => {
 });
 
 // 👇 Start handling routes here
-const catsRoutes = require("./cats.routes");
-router.use("/cats", catsRoutes);
+
 
 module.exports = router;
