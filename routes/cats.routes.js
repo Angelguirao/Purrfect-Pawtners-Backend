@@ -16,7 +16,7 @@ router.get("/cats", async (req, res, next) => {
 // 🐱 GET details of one cat (read)
 router.get("/cats/:id", async (req, res, next) => {
     try {
-        const cat = await Cat.findById(req.params.id);
+        const cat = await Cat.findById(req.params.id).populate("Owner");
         res.status(200).json(cat);
     } catch (error) {
         console.log("error", error);
