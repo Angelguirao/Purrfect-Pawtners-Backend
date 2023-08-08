@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const Article = require('../models/Article.model')
 
-router.get('/articles', async (req, res) => {
+router.get('/', async (req, res) => {
     try {
         const articles = await Article.find()
         res.status(200).json(articles);
@@ -11,7 +11,7 @@ router.get('/articles', async (req, res) => {
     }
 });
 
-router.post('/articles', async (req, res) => {
+router.post('/', async (req, res) => {
     try {
         const payload = req.body
         const newArticle = await Article.create(payload);
