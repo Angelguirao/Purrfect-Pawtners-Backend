@@ -28,7 +28,7 @@ router.get("/cats/:id", async (req, res, next) => {
 router.post("/cats/:id/adopt", async (req, res, next) => {
     try {
         const payload = req.body;
-        const adoptedCat = Cat.create(payload);
+        const adoptedCat = await Cat.create(payload);
         res.status(201).json(adoptedCat);
     } catch (error) {
         console.log("error", error);
@@ -40,7 +40,7 @@ router.post("/cats/:id/adopt", async (req, res, next) => {
 router.post("/cats", async (req, res, next) => {
     try {
         const payload = req.body;
-        const toBeAdoptedCat = Cat.create(payload);
+        const toBeAdoptedCat = await Cat.create(payload);
         res.status(201).json(toBeAdoptedCat);
     } catch (error) {
         console.log("error", error);
