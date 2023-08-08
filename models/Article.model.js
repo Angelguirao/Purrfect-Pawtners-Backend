@@ -15,11 +15,11 @@ const articleSchema = new Schema(
       },
       month: {
         type: String,
-        required: true
+        
       },
       year: {
         type: String,
-        required: true
+        
       },
       author: {
         type: String, 
