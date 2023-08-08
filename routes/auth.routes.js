@@ -60,7 +60,7 @@ router.get('/', (req, res, next) => {
 
   router.get("/:id", async (req, res, next) => {
     try {
-        const user = await User.findById(req.params.id);
+        const user = await User.findById(req.params.id).populate('articles');
         res.status(200).json(user);
     } catch (error) {
         console.log("error", error);
