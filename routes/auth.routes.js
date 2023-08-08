@@ -2,6 +2,7 @@ const router = require("express").Router();
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const User = require('../models/User.model')
+
 const { isAuthenticated } = require('../middlewares/jwt.middleware')
 router.get('/', (req, res, next) => {
     res.json('All good in auth')
@@ -56,4 +57,14 @@ router.get('/', (req, res, next) => {
     currentUser.password = '****'
     res.status(200).json({message: 'Token is valid', currentUser})
   })
+
+  router.get("/:id", async (req, res, next) => {
+    try {
+        const user = await User.findById(req.params.id);
+        res.status(200).json(user);
+    } catch (error) {
+        console.log("error", error);
+        res.status(500).json(error);
+    }
+});
 module.exports = router
