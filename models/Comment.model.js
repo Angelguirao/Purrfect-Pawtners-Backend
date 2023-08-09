@@ -3,11 +3,10 @@ const { Schema, model } = require("mongoose");
 
 const commentSchema = new Schema(
     {
-      article: {
+      title: {
         type: String,
         trim: true,
         required: true,
-        unique: true,
       },
       information: {
         type: String,
@@ -15,13 +14,17 @@ const commentSchema = new Schema(
       },
       month: {
         type: String,
-        required: true
+        
       },
       year: {
         type: String,
-        required: true
+        
       },
       author: {
+        type: String,
+        required: true 
+      },
+      receptor: {
         type: String,
         required: true 
       }
