@@ -55,7 +55,9 @@ router.get('/', (req, res, next) => {
     const currentUser = await User.findById(req.payload.userId)
         .populate('articles')
         .populate("cat")
-        .populate("house");
+        .populate("house")
+        .populate("comments")
+        .exec();
     //never send the password, hashed or not to the front end
     currentUser.password = '****'
     res.status(200).json({message: 'Token is valid', currentUser})
@@ -66,7 +68,8 @@ router.get('/', (req, res, next) => {
         const user = await User.findById(req.params.id)
         .populate('articles')
         .populate("cat")
-        .populate("house");
+        .populate("house")
+        .populate("comments");
         res.status(200).json(user);
     } catch (error) {
         console.log("error", error);

@@ -11,7 +11,7 @@ const catSchema = new Schema(
             type: String,
             required: true,
         },
-        imageUrl: {
+        image: {
             type: String,
             required: false,
         },
