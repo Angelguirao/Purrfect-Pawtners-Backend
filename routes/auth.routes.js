@@ -53,6 +53,7 @@ router.get('/', (req, res, next) => {
   router.get('/verify', isAuthenticated, async(req, res) => {
     console.log('here is after the middleware, what JWT is giving us', req.payload)
     const currentUser = await User.findById(req.payload.userId)
+        .populate('articles')
         .populate("cat")
         .populate("house")
         .exec();
@@ -63,7 +64,10 @@ router.get('/', (req, res, next) => {
 
   router.get("/:id", async (req, res, next) => {
     try {
-        const user = await User.findById(req.params.id).populate('articles');
+        const user = await User.findById(req.params.id)
+        .populate('articles')
+        .populate("cat")
+        .populate("house");
         res.status(200).json(user);
     } catch (error) {
         console.log("error", error);
