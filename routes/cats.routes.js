@@ -1,4 +1,5 @@
 const Cat = require("../models/Cat.model");
+const User = require("../models/User.model");
 
 const router = require("express").Router();
 
@@ -17,7 +18,7 @@ router.get("/", async (req, res, next) => {
 // 🐱 GET details of one cat (read)
 router.get("/:id", async (req, res, next) => {
     try {
-        const cat = await Cat.findById(req.params.id);
+        const cat = await Cat.findById(req.params.id).populate("Owner");
         res.status(200).json(cat);
     } catch (error) {
         console.log("error", error);
@@ -29,7 +30,7 @@ router.get("/:id", async (req, res, next) => {
 router.post("/:id/adopt", async (req, res, next) => {
     try {
         const payload = req.body;
-        const adoptedCat = Cat.create(payload);
+        const adoptedCat = await Cat.create(payload);
         res.status(201).json(adoptedCat);
     } catch (error) {
         console.log("error", error);
@@ -41,7 +42,16 @@ router.post("/:id/adopt", async (req, res, next) => {
 router.post("/", async (req, res, next) => {
     try {
         const payload = req.body;
-        const toBeAdoptedCat = Cat.create(payload);
+        // Create the cat
+        const toBeAdoptedCat = await Cat.create(payload);
+        
+        // Update the user's document to include the new cat's ID
+        await User.findByIdAndUpdate(
+            payload.Owner, // Assuming Owner field contains the user's ID
+            { $push: { cat: toBeAdoptedCat._id } },
+            { new: true }
+        );
+        
         res.status(201).json(toBeAdoptedCat);
     } catch (error) {
         console.log("error", error);
@@ -53,7 +63,7 @@ router.post("/", async (req, res, next) => {
 router.put("/:id", async (req, res, next) => {
     try {
         const payload = req.body;
-        const updatedcat = await Cat.findByIdAndUpdate(req.params.id, payload);
+        const updatedcat = await Cat.findByIdAndUpdate(req.params.id, payload,{new: true});
         res.status(202).json(updatedcat);
     } catch (error) {
         console.log("error", error);

@@ -6,7 +6,6 @@ const userSchema = new Schema(
     name: {
       type: String,
       required: [true, 'Name is required.'],
-      unique: true,
       lowercase: true,
       trim: true
     },
@@ -24,7 +23,7 @@ const userSchema = new Schema(
     house: [
       {
       type: Schema.Types.ObjectId,
-      ref:"House"
+      ref:"Home"
       }
     ],
     cat: [
