@@ -12,6 +12,18 @@ router.get('/:id', async (req, res) => {
     }
 });
 
+router.get('/info/:id', async (req, res) => {
+    const params = req.params.id
+    
+    try {
+        const comment = await Comment.findById(params)
+        res.status(200).json(comment);
+    } catch (err) {
+        console.error("Error fetching comment:", err);
+        res.status(500).json(err);
+    }
+});
+
 router.post('/:id', async (req, res) => {
     const payload = req.body.payload
         console.log("your payload is:", payload)
