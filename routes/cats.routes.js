@@ -1,4 +1,5 @@
 const Cat = require("../models/Cat.model");
+const User = require("../models/User.model");
 
 const router = require("express").Router();
 
@@ -40,7 +41,16 @@ router.post("/cats/:id/adopt", async (req, res, next) => {
 router.post("/cats", async (req, res, next) => {
     try {
         const payload = req.body;
+        // Create the cat
         const toBeAdoptedCat = await Cat.create(payload);
+        
+        // Update the user's document to include the new cat's ID
+        await User.findByIdAndUpdate(
+            payload.Owner, // Assuming Owner field contains the user's ID
+            { $push: { cat: toBeAdoptedCat._id } },
+            { new: true }
+        );
+        
         res.status(201).json(toBeAdoptedCat);
     } catch (error) {
         console.log("error", error);
@@ -52,7 +62,7 @@ router.post("/cats", async (req, res, next) => {
 router.put("/cats/:id", async (req, res, next) => {
     try {
         const payload = req.body;
-        const updatedcat = await Cat.findByIdAndUpdate(req.params.id, payload);
+        const updatedcat = await Cat.findByIdAndUpdate(req.params.id, payload,{new: true});
         res.status(202).json(updatedcat);
     } catch (error) {
         console.log("error", error);

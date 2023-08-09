@@ -52,6 +52,9 @@ router.get('/', (req, res, next) => {
   router.get('/verify', isAuthenticated, async(req, res) => {
     console.log('here is after the middleware, what JWT is giving us', req.payload)
     const currentUser = await User.findById(req.payload.userId)
+        .populate("cat")
+        .populate("house")
+        .exec();
     //never send the password, hashed or not to the front end
     currentUser.password = '****'
     res.status(200).json({message: 'Token is valid', currentUser})

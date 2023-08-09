@@ -1,11 +1,19 @@
 const router = require('express').Router()
 const Home = require('../models/Home.model');
+const User = require("../models/User.model");
 
 // POST request to create Home - "C"RUD
 router.post('/homes', async (req, res) => {
     try {
         const payload = req.body
         const newHome = await Home.create(payload);
+
+         // Update the user's document to include the new home's ID
+        await User.findByIdAndUpdate(
+            payload.Owner, // Assuming Owner field contains the user's ID
+            { $push: { house: newHome._id } },
+            { new: true }
+        );
         res.status(201).json(newHome);
     } catch (err) {
         res.status(500).json(err);
