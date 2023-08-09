@@ -30,6 +30,9 @@ app.use("/cats", catsRoutes);
 const articlesRoutes = require("./routes/articles.routes");
 app.use("/articles", articlesRoutes);
 
+const commentsRoutes = require("./routes/comments.routes");
+app.use("/comments", commentsRoutes);
+
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);
 
