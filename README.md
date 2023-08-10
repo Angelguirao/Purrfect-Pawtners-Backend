@@ -196,4 +196,4 @@ The Article model represents articles posted by users. It includes:
 
 ### Slides
 
-[Slides Link](http://slides.com](https://docs.google.com/presentation/d/1qJIOh0WGaxj8EA_32cAlyESbN7j-B9uU3KbZKPcF3Ak/edit?usp=sharing)https://docs.google.com/presentation/d/1qJIOh0WGaxj8EA_32cAlyESbN7j-B9uU3KbZKPcF3Ak/edit?usp=sharing)
+[Slides Link](https://docs.google.com/presentation/d/1qJIOh0WGaxj8EA_32cAlyESbN7j-B9uU3KbZKPcF3Ak/edit#slide=id.g193b26f510_0_0)
