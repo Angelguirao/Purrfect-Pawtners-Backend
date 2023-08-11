@@ -4,9 +4,10 @@ const User = require("../models/User.model");
 const router = require("express").Router();
 
 //🐱 GET to show all cats (read)
-router.get("/cats", async (req, res, next) => {
+router.get("/", async (req, res, next) => {
     try {
         const cats = await Cat.find();
+        console.log("cats", cats);
         res.status(200).json(cats);
     } catch (error) {
         console.log("error", error);
@@ -15,7 +16,7 @@ router.get("/cats", async (req, res, next) => {
 });
 
 // 🐱 GET details of one cat (read)
-router.get("/cats/:id", async (req, res, next) => {
+router.get("/:id", async (req, res, next) => {
     try {
         const cat = await Cat.findById(req.params.id).populate("Owner");
         res.status(200).json(cat);
@@ -26,7 +27,7 @@ router.get("/cats/:id", async (req, res, next) => {
 });
 
 // 🐱 POST adopt one cat (create)
-router.post("/cats/:id/adopt", async (req, res, next) => {
+router.post("/:id/adopt", async (req, res, next) => {
     try {
         const payload = req.body;
         const adoptedCat = await Cat.create(payload);
@@ -38,7 +39,7 @@ router.post("/cats/:id/adopt", async (req, res, next) => {
 });
 
 // 🐱 POST for adoption one cat (create)
-router.post("/cats", async (req, res, next) => {
+router.post("/", async (req, res, next) => {
     try {
         const payload = req.body;
         // Create the cat
@@ -59,7 +60,7 @@ router.post("/cats", async (req, res, next) => {
 });
 
 // 🐱 PUT one cat (update)
-router.put("/cats/:id", async (req, res, next) => {
+router.put("/:id", async (req, res, next) => {
     try {
         const payload = req.body;
         const updatedcat = await Cat.findByIdAndUpdate(req.params.id, payload,{new: true});
@@ -70,7 +71,7 @@ router.put("/cats/:id", async (req, res, next) => {
     }
 });
 // 🐱 DELETE one cat (delete)
-router.delete("/cats/:id", async (req, res, next) => {
+router.delete("/:id", async (req, res, next) => {
     try {
         await Cat.findByIdAndDelete(req.params.id);
         res.status(202).json({ message: "Post deleted" });

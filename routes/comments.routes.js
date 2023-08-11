@@ -24,6 +24,20 @@ router.get('/info/:id', async (req, res) => {
     }
 });
 
+router.delete('/delete/:id', async (req, res) => {
+    const params = req.params.id
+    console.log("your params are########", params)
+    
+    try {
+        const comment = await Comment.findByIdAndDelete(params)
+        res.status(202).json(comment);
+    } catch (err) {
+        console.error("Error fetching comment:", err);
+        res.status(500).json(err);
+        console.log("DELETE ERROR", err)
+    }
+});
+
 router.post('/:id', async (req, res) => {
     const payload = req.body.payload
         console.log("your payload is:", payload)
