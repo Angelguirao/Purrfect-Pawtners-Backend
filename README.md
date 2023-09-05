@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="https://github.com/Angelguirao/Purrfect-Pawtners-Backend/assets/44321245/ca36e92e-ac7c-430e-bcfe-460e0c93a56d" alt="Home">
+</p>
+
 # Purrfect Pawtners 🐱 
 
 ## Description
