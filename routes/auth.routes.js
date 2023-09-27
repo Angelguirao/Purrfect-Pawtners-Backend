@@ -64,16 +64,17 @@ router.get('/', (req, res, next) => {
   })
 
   router.get("/:id", async (req, res, next) => {
-    try {
-        const user = await User.findById(req.params.id)
-        .populate('articles')
-        .populate("cat")
-        .populate("house")
-        .populate("comments");
-        res.status(200).json(user);
-    } catch (error) {
-        console.log("error", error);
-        res.status(500).json(error);
-    }
-});
+      try {
+          const user = await User.findById(req.params.id)
+          .populate('articles')
+          .populate("cat")
+          .populate("house")
+          .populate("comments");
+          res.status(200).json(user);
+      } catch (error) {
+          console.log("error", error);
+          res.status(500).json(error);
+      }
+      });
+
 module.exports = router

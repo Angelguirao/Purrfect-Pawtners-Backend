@@ -21,18 +21,17 @@ module.exports = (app) => {
   // Services like heroku use something called a proxy and you need to add this to your server
   app.set("trust proxy", 1);
 
-  // controls a very specific header to pass headers from the frontend
-  app.use(
-    cors({
-      origin: [FRONTEND_URL]
-    })
-  );
+  // ℹ️ Enable Cross-Origin Resource Sharing with the specified frontend URL.
+  // This is essential for making HTTP requests to Express from a different domain.
+  app.use(cors({ origin: [FRONTEND_URL] }));
 
-  // In development environment the app logs
+  // ℹ️ Logger to log incoming requests in development.
   app.use(logger("dev"));
 
-  // To have access to `body` property in the request
+  // ℹ️ Enable parsing of JSON payloads in the body of HTTP requests.
   app.use(express.json());
   app.use(express.urlencoded({ extended: false }));
+  
+  // ℹ️ Enable parsing of cookies in HTTP requests.
   app.use(cookieParser());
 };
