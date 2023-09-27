@@ -1,24 +1,24 @@
 const router = require('express').Router();
 const homesController = require('../controllers/homes.controller');
 
-// @route   POST /homes
+// @route   POST /
 // @desc    Create a new home and update the user's homes
-router.post('/homes', homesController.createHome);
+router.post('/', homesController.createHome);
 
-// @route   GET /homes
+// @route   GET /
 // @desc    Fetch all homes
-router.get('/homes', homesController.getAllHomes);
+router.get('/', homesController.getAllHomes);
 
-// @route   GET /homes/:id
+// @route   GET /:id
 // @desc    Fetch details of one home by ID
-router.get('/homes/:id', homesController.getHomeById);
+router.get('/:id', homesController.getHomeById);
 
-// @route   PUT /homes/:id
+// @route   PUT /:id
 // @desc    Update one home by ID
-router.put('/homes/:id', homesController.updateHomeById);
+router.put('/:id', homesController.updateHomeById);
 
-// @route   DELETE /homes/:id
+// @route   DELETE /:id
 // @desc    Delete one home by ID
-router.delete('/homes/:id', homesController.deleteHomeById);
+router.delete('/:id', homesController.deleteHomeById);
 
 module.exports = router;

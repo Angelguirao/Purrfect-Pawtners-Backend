@@ -17,22 +17,22 @@ require("./config")(app);
 
 // Importing various route handlers and associating them with their respective endpoints.
 const indexRoutes = require("./routes/index.routes");
-app.use("/api", indexRoutes);
+app.use("/api/index", indexRoutes);
 
 const homeRoutes = require('./routes/home.routes');
-app.use('/api', homeRoutes);
+app.use('/api/homes', homeRoutes);
 
 const authRoutes = require('./routes/auth.routes');
-app.use('/auth', authRoutes);
+app.use('/api/auth', authRoutes);
 
 const catsRoutes = require("./routes/cats.routes");
-app.use("/cats", catsRoutes);
+app.use("/api/cats", catsRoutes);
 
 const articlesRoutes = require("./routes/articles.routes");
-app.use("/articles", articlesRoutes);
+app.use("/api/articles", articlesRoutes);
 
 const commentsRoutes = require("./routes/comments.routes");
-app.use("/comments", commentsRoutes);
+app.use("/api/comments", commentsRoutes);
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 // This is crucial for returning proper error messages and status codes to the client.
