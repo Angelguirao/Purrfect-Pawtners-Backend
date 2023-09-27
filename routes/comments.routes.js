@@ -1,57 +1,20 @@
 const router = require("express").Router();
-const Comment = require('../models/Comment.model');
-const User = require("../models/User.model");
+const commentsController = require('../controllers/comments.controller');
 
-router.get('/:id', async (req, res) => {
-    try {
-        const comment = await Comment.find()
-        res.status(200).json(comment);
-    } catch (err) {
-        console.error("Error fetching comment:", err);
-        res.status(500).json(err);
-    }
-});
+// @route   GET /:id
+// @desc    Fetch all comments
+router.get('/:id', commentsController.getAllComments);
 
-router.get('/info/:id', async (req, res) => {
-    const params = req.params.id
-    
-    try {
-        const comment = await Comment.findById(params)
-        res.status(200).json(comment);
-    } catch (err) {
-        console.error("Error fetching comment:", err);
-        res.status(500).json(err);
-    }
-});
+// @route   GET /info/:id
+// @desc    Fetch details of one comment by ID
+router.get('/info/:id', commentsController.getCommentById);
 
-router.delete('/delete/:id', async (req, res) => {
-    const params = req.params.id
-    console.log("your params are########", params)
-    
-    try {
-        const comment = await Comment.findByIdAndDelete(params)
-        res.status(202).json(comment);
-    } catch (err) {
-        console.error("Error fetching comment:", err);
-        res.status(500).json(err);
-        console.log("DELETE ERROR", err)
-    }
-});
+// @route   POST /:id
+// @desc    Create a new comment and update the user's comments
+router.post('/:id', commentsController.createComment);
 
-router.post('/:id', async (req, res) => {
-    const payload = req.body.payload
-        console.log("your payload is:", payload)
-    try {
-        
-        const newComment = await Comment.create(payload);
-        await User.findByIdAndUpdate(payload.receptor,
-            { $push: { comments: newComment } }, 
-            { new: true });
-        res.status(201).json(newComment);
-    } catch (err) {
-        res.status(500).json(err);
-        console.log("your error si", err)
-    }
-});
+// @route   DELETE /delete/:id
+// @desc    Delete one comment by ID
+router.delete('/delete/:id', commentsController.deleteCommentById);
 
-module.exports = router
+module.exports = router;

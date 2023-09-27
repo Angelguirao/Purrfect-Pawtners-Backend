@@ -1,7 +1,8 @@
 const router = require("express").Router();
+const indexController = require('../controllers/index.controller');
 
-router.get("/", (req, res, next) => {
-    res.json("All good in here");
-});
+// @route   GET /
+// @desc    Send a static response
+router.get("/", indexController.getIndex);
 
 module.exports = router;

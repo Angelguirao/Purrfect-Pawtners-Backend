@@ -1,28 +1,25 @@
 const router = require("express").Router();
-const Article = require('../models/Article.model');
-const User = require("../models/User.model");
+const articlesController = require('../controllers/articles.controller');
 
-router.get('/', async (req, res) => {
-    try {
-        const articles = await Article.find()
-        res.status(200).json(articles);
-    } catch (err) {
-        console.error("Error fetching articles:", err);
-        res.status(500).json(err);
-    }
-});
+// @route   POST /
+// @desc    Create a new article and update the user's articles
+router.post('/', articlesController.createArticle);
 
-router.post('/', async (req, res) => {
-    try {
-        const payload = req.body
-        const newArticle = await Article.create(payload);
-        await User.findByIdAndUpdate(payload.author,
-            { $push: { articles: newArticle } }, 
-            { new: true });
-        res.status(201).json(newArticle);
-    } catch (err) {
-        res.status(500).json(err);
-    }
-});
+// @route   GET /
+// @desc    Fetch all articles
+router.get('/', articlesController.getArticles);
 
-module.exports = router
+// @route   GET /:id
+// @desc    Fetch details of one article by ID
+router.get('/:id', articlesController.getArticleById);
+
+// @route   PUT /:id
+// @desc    Update one article by ID
+router.put('/:id', articlesController.updateArticleById);
+
+// @route   DELETE /:id
+// @desc    Delete one article by ID
+router.delete('/:id', articlesController.deleteArticleById);
+
+module.exports = router;
+

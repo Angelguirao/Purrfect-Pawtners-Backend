@@ -17,10 +17,11 @@ function getTokenFromHeaders(req) {
     const token = req.headers.authorization.split(' ')[1]
     return token
   }
+  // Return null if no token found
   return null
 }
 
 // Export the middleware so that we can use it to create a protected routes
 module.exports = {
-  isAuthenticated,
+  isAuthenticated, // Exporting the middleware
 }
